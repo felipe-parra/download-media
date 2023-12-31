@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'DLApp',
   description: 'Scrapping media',
+  openGraph: {
+    images: '/og-image.png',
+  },
 }
 
 export default function RootLayout({

@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "DLApp"
+export const alt = "DLApp";
 export const size = {
   width: 1200,
   height: 630
-}
+};
 
-export const contentType = "image/png"
+export const contentType = "image/png";
 
 export const metadata = {
   title: 'DL App',
@@ -26,12 +26,11 @@ export default async function Image() {
           height: "100%",
           justifyContent: "center",
           alignItems: "center",
-          background: "linear-gradient(to bottom right)",
+          background: "black",
           fontSize: "5rem",
           color: "white"
         }}
       />
     ),
-    { ...size }
-  )
+  );
 }
