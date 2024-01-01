@@ -30,7 +30,8 @@ const formSchema = z.object({
 export type FormTypeDL = z.infer<typeof formSchema>
 export default function HomePage() {
   const [downloadUrl, setDownloadUrl] = useState(null)
-  const { register, handleSubmit, reset, formState: { errors }, clearErrors } = useForm({
+  const [thumbnail, setThumbnail] = useState(null)
+  const { register, handleSubmit, reset, formState: { errors, isLoading, isSubmitting }, clearErrors, setFocus, } = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       link: ''
@@ -43,33 +44,37 @@ export default function HomePage() {
     reset()
     clearErrors()
     setDownloadUrl(null)
+    setThumbnail(null)
+    setFocus('link')
   }
 
   const onSubmit = async (data: FormTypeDL) => {
     console.log({ data })
 
-    const { url } = await getMediaUrl(data.link)
+    const { thumb, url } = await getMediaUrl(data.link)
     setDownloadUrl(url)
+    setThumbnail(thumb)
 
   }
   return (
-    <section className='w-full h-dvh flex flex-col mx-auto'>
+    <section className='w-full h-full flex flex-col mx-auto'>
       <h3 className='flex items-center justify-center my-2'>
         <AiFillInstagram className="text-3xl mx-2 " />
         Download from Instagram
       </h3>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='mx-auto w-full max-w-md rounded-xl p-6 max-h-96'
+        className='mx-auto w-full max-w-md rounded-xl p-6 h-full'
         ref={formRef}
       >
-        <article className='card w-full mx-auto p-4'>
+        <article className='w-full mx-auto p-4'>
           <label className='label' htmlFor="link">Link</label>
           <input
             className="input input-bordered w-full"
             placeholder="Type here"
             type="text"
             {...register('link')}
+            autoFocus
           />
           {
             errors?.link?.message ?
@@ -77,6 +82,20 @@ export default function HomePage() {
                 {errors?.link?.message}
               </div> :
               null
+          }
+        </article>
+
+        {
+          isLoading || isSubmitting &&
+          <article className='p-4 flex items-center justify-center w-full duration-300 transition-all'>
+            <span className="loading loading-dots loading-xs"></span>
+          </article>
+        }
+        <article className='p-4 flex items-center justify-center w-full duration-300 transition-all'>
+          {
+            thumbnail
+              ? <img src={thumbnail} alt={"reel"} width={100} height={100} className='object-contain transition-all duration-500' />
+              : null
           }
         </article>
         <article className='p-4 flex items-center justify-center w-full duration-300 transition-all'>
@@ -98,7 +117,6 @@ export default function HomePage() {
             </a>
           }
         </article>
-        <Toast id={0} message={'Ready'} type={''} />
       </form>
     </section>
   )
