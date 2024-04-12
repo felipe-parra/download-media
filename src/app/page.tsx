@@ -57,8 +57,8 @@ export default function HomePage() {
 
   }
   return (
-    <section className='w-full h-full flex flex-col mx-auto'>
-      <h3 className='flex items-center justify-center my-2'>
+    <section className='w-full min-h-screen flex flex-col mx-auto bg-secondary'>
+      <h3 className='flex items-center justify-center my-2 font-semibold text-3xl'>
         <AiFillInstagram className="text-3xl mx-2 " />
         Download from Instagram
       </h3>
@@ -70,7 +70,7 @@ export default function HomePage() {
         <article className='w-full mx-auto p-4'>
           <label className='label' htmlFor="link">Link</label>
           <input
-            className="input input-bordered w-full"
+            className="input input-primary w-full"
             placeholder="Type here"
             type="text"
             {...register('link')}
@@ -102,12 +102,12 @@ export default function HomePage() {
           {
             downloadUrl
               ? <button className='btn btn-secondary w-1/2' onClick={() => resetForm()}>Reset</button>
-              : <button type='submit' className='btn btn-outline w-full'>Get link</button>
+              : <button type='submit' className='btn btn-primary w-full'>Get link</button>
           }
           {
             downloadUrl
             && <a
-              className='btn btn-primary w-1/2 mx-1'
+              className='btn btn-secondary w-1/2 mx-1'
               download="Example-PDF-document"
               href={downloadUrl}
               rel="noopener noreferrer"
