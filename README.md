@@ -1,3 +1,3 @@
-# DL App
+# Instagram Media Download Page - Scraping Capabilities Showcase
 
-A project to handle links of instagram reels or post & Twitter
+Welcome to our Instagram Media Download Page, showcasing cutting-edge scraping capabilities without Ads! Our platform offers a seamless solution to download Posts, Reels, and Stories from Instagram. This project is a testament to the power of web scraping technology.
