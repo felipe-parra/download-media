@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="dim" className='w-full h-screen'>
-      <body className={inter.className}>
+    <html lang="en" data-theme="dim">
+      <body className={`${inter.className} w-full min-h-screen text-primary`}>
         <Drawer />
         {children}
         <Footer />
